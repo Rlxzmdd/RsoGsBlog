@@ -2,7 +2,7 @@
 <footer class="blog-footer">
     <p>RsoGs's Blog<br /> </p>
     <div class="am-center">
-        <a href="https://coding.net/u/Rlxzmdd" class="am-icon-btn am-icon-github" style="background-color: #212529;color: #ffffff;"></a>
+        <a href="https://github.com/Rlxzmdd/Rlxzmdd-s-Blog" class="am-icon-btn am-icon-github" style="background-color: #212529;color: #ffffff;"></a>
     </div>
     <small><script src="https://s13.cnzz.com/z_stat.php?id=1273355869&amp;web_id=1273355869" language="JavaScript"></script> </small>
     <p></p>
