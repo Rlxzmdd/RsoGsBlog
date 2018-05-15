@@ -1,0 +1,14 @@
+blockquote {
+    color: #424242;
+    background-color: #f4f4f4;
+    border-left: 4px solid #3949AB;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+pre{
+    border: 0;
+    border-left: 4px solid #E91E63;
+    background-color: #212529;
+    margin-left: -10px;
+    margin-right: -10px;
+}

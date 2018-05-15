@@ -1,0 +1,59 @@
+
+.blog-body-shortArticle{
+    padding: 10px;
+    background-color: white;
+}
+.blog-body-shortArticle:not(:last-child) {
+    margin-bottom: 10px;
+}
+.blog-body-shortArticles{
+    padding: 0;
+}
+.blog-article-content .am-u-lg-12{
+    padding: 0;
+}
+.blog-article-content pre{
+    background-color: #f4f4f4;
+    margin-right: -10px;
+    margin-left: -10px;
+    border: 0;
+}
+.blog-article-meta{
+    margin-bottom: 0;
+    color: #757575;
+}
+.blog-article-pagination{
+    margin: 10px 0 5px 0;
+}
+.blog-shadow-box:hover{
+    box-shadow: 0 0 10px #BDBDBD;
+}
+.blog-shadow-box:active{
+    box-shadow: 0 0 15px #9E9E9E;
+}
+blockquote {
+    color: #424242;
+    background-color: #FAFAFA;
+    border-left: 4px solid #3949AB;
+    margin-left: -10px;
+    margin-right: -10px;
+    box-shadow: 0 0 0 0  , /*左边阴影*/
+    0 0 0 0, /*右边阴影*/
+    0 0 2px #E0E0E0, /*顶部阴影*/
+    0 0 2px #E0E0E0; /*底边阴影*/
+}
+pre{
+    border: 0;
+    border-left: 4px solid #E91E63;
+    background-color: #212529;
+    margin-left: -10px;
+    margin-right: -10px;
+    box-shadow: 0 0 0 0  , /*左边阴影*/
+    0 0 0 0, /*右边阴影*/
+    0 0 2px #E0E0E0 inset, /*顶部阴影*/
+    0 0 2px #E0E0E0 inset; /*底边阴影*/
+}
+pre p{
+    margin: 0;
+    padding: 0;
+}
