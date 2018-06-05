@@ -1,6 +1,72 @@
-.blog-body-article{
+
+.rs-articles {
+    width: 70%;
+    float: left;
+}
+
+.rs-article {
+    box-shadow: 0 0 6px #E0E0E0;
+    background-color: #ffffff;
     padding: 10px;
-    background-color: white;
+}
+
+.rs-article-title {
+    font-size: 2.8rem;
+    line-height: 1.15;
+    font-weight: 400;
+}
+
+.rs-article-meta {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #757575;
+}
+
+.rs-article-content > pre {
+    margin: 0 -10px;
+    border: 0;
+    border-left: 4px solid #E91E63;
+    background-color: #212529;
+}
+
+.rs-article-content {
+    padding: 0;
+}
+
+.rs-article-tags {
+    height: 20px;
+    margin: 10px 0 0 0;
+}
+
+.rs-article-tags > .rs-article-tag {
+    float: left;
+    z-index: 100;
+    color: #9c9cbd;
+    background-color: #FFFFFF;
+    border: solid 1px #9c9cbd;
+    box-shadow: 0 0 6px #E0E0E0;
+}
+
+.rs-article-tags > .rs-article-tag-visit {
+    float: right;
+    color: #9fbda3;
+    background-color: #FFFFFF;
+    border: solid 1px #9fbda3;
+    box-shadow: 0 0 6px #E0E0E0;
+}
+
+.rs-article-tags > .rs-article-tag-like {
+    float: right;
+    color: #bd9595;
+    background-color: #FFFFFF;
+    border: solid 1px #bd9595;
+    box-shadow: 0 0 6px #E0E0E0;
+}
+
+.rs-article-tag-like:focus,
+.rs-article-tag-like:hover {
+    border: solid 1px #D32F2F;
+    color: #D32F2F;
 }
 p{
     margin-top: 10px;
@@ -12,64 +78,37 @@ blockquote p{
 }
 blockquote {
     color: #424242;
-    background-color: #FAFAFA;
+    background-color: #ffffff;
     padding-right: 10px;
     padding-left: 10px;
-    border-left:  4px solid #3949AB;
+    border-left: 4px solid #3949AB;
     margin-bottom: 10px;
     margin-left: -10px;
     margin-right: -10px;
-    box-shadow: 0 0 0 0  , /*左边阴影*/
-    0 0 0 0, /*右边阴影*/
-    0 0 5px #E0E0E0, /*顶部阴影*/
-    0 0 5px #E0E0E0; /*底边阴影*/
+    box-shadow: inset 0 0 5px #EEEEEE; /*底边阴影*/
 }
-blockquote:not(:first-child){
+
+blockquote:not(:first-child) {
     margin-top: 10px;
 }
-.blog-article-tags{
-    margin-top: 20px;
-    height: 21px;
+.rs-article-content img {
+    width: 100%;
+    height: auto;
+
+    box-shadow: 0 0 2px #E0E0E0; /*底边阴影*/
 }
-.am-comments-list{
-    margin-bottom: 0;
-}
+
 @media only screen and (max-width: 641px) {
-    .blog-body-sidebar {
-        padding-top: 10px;
+    .rs-articles {
+        width: 100%;
     }
-    .blog-article-tags{
-        background-color: white;
-        height: 50px;
-        z-index: 100;
-        position: fixed;
-        padding: 15px 10px 15px 10px;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        box-shadow: 0 0 10px #E0E0E0;
-    }
-    .blog-footer{
-        margin-bottom: 40px;
+
+    .rs-article {
+        width: 100%;
     }
 }
-pre{
-    border: 0;
-    border-left: 4px solid #E91E63;
-    background-color: #212529;
-    margin-left: -10px;
-    margin-right: -10px;
-    box-shadow: 0 0 0 0  , /*左边阴影*/
-    0 0 0 0, /*右边阴影*/
-    0 0 5px #E0E0E0, /*顶部阴影*/
-    0 0 5px #E0E0E0; /*底边阴影*/
-}
-.blog-article-content{
-    margin: 10px -10px 10px -10px;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0 0 0 0  , /*左边阴影*/
-    0 0 0 0, /*右边阴影*/
-    0 0 5px #E0E0E0 inset, /*顶部阴影*/
-    0 0 5px #E0E0E0 inset; /*底边阴影*/
+
+img {
+    width: 100%;
+    height: auto;
 }

@@ -10,7 +10,7 @@ a Blog
   博客文章的评论与“我觉得有用”按钮<p>
   博客文章评论和各地方的防注入，csrf，xss等<p>
   <p>
-数据库结构如有需要，请使用issues联系我<p>
+数据库结构若有需要，请使用issues联系我<p>
 <p>
 <p>
 Example： https://have.somuch.work

@@ -7,27 +7,25 @@
  */
 namespace app\controllers;
 
-use app\classes\itemClass;
+use app\classes\articleClass;
 use app\classes\userClass;
 use app\models\UserModel;
 use app\utils\addressUtils;
 use app\utils\printUtils;
 use app\utils\sessionUtils;
 use app\utils\textUtils;
-use app\utils\timeUtils;
+use rsConfig;
 use rsogsphp\base\Controller;
 use app\models\BlogModel;
 
 class BlogController extends Controller
 {
-	// 首页方法，测试框架自定义DB查询
 	public function index($id)
 	{
 		if(!isset($id[0])){
 			$id[0] = 1;
 		}
 		sessionUtils::start();
-		$shortArticle = "";
 
 		$num = $id[0];
 		if ((!is_numeric($num))|| $num < 0) {
@@ -39,34 +37,28 @@ class BlogController extends Controller
 			//return;
 			$num = 1;
 		}
-		(new BlogModel())->addPageVisits('index:'.$num);
+        (new BlogModel())->addArticleVisits('index:' . $num);
 		$arr = (new BlogModel())->where(['`index` = 1'])->order(['id desc LIMIT '.(($num - 1) * 5) .',5'])->fetchAll();
-		$pages = "";
-		$this->assign('title', 'Rlxzmdd\'s | Blog');
+        $articles = '';
+        $this->assign('title', rsConfig::$config['WebTitle'] . '首页');
 		$this->renderTop();
 		$this->renderHeader();
 		foreach ($arr as $key=>$value){
-			$tags =  $value['tags'];
-			$tagsarray = explode("、",$tags);
-			$tagstxt ="";
-			foreach ($tagsarray as $a){
-				$tagstxt = $tagstxt. '<a href="/blog/tags/'.$a.'" class="am-badge am-badge-primary  am-round" style="color: #1E88E5;background-color: #FFFFFF;border: solid 1px #1E88E5 ;float: left;">' .$a.'</a>';
-			}
-			$p = new itemClass($value['id'], $value['title'], $value['content'], $value['time'], $value['author'],$value['tags'],$value['index']);
+            $p = new articleClass($value['id'], $value['title'], $value['content'], $value['time'], $value['author'], $value['tags'], $value['index'], (new BlogModel())->getArticleLikes($value['id']), (new BlogModel())->getArticleVisits($value['id']));
 			$this->assign('id', $p->getId());
 			$this->assign('title',$p->getTitle());
-			$this->assign('content', textUtils::subChinaStr($p->getContent()) . '......');
+            $this->assign('content', textUtils::filterText(textUtils::subChinaStr($p->getContent())));
 			$this->assign('time', $p->getTime());
 			$this->assign('author', $p->getAuthor());
-			$this->assign('tagstxt',$tagstxt);
+            $this->assign('tags', explode("、", $value['tags']));
 			$this->assign('visits', $p->getVisits());
 			$this->assign('likes', $p->getLikes());
 			$this->assign('index', $p->getVisits());
-			$pages = $pages.$this->renderLayout("shortArticle");
+            $articles = $articles . $this->renderLayout("shortArticle");
 			//$pages=$pages. printUtils::initItem($p);
 		}
-		$this->assign('title', 'Rlxzmdd\'s | Blog');
-		$this->assign('pages', $pages);
+        $this->assign('articles', $articles);
+        $this->assign('sidebars', $this->getLayouts('sidebars'));
 		$this->assign('skip', printUtils::printSkip($num,$numbs));
 		$this->renderView();
 		$this->renderFooter();
@@ -77,8 +69,8 @@ class BlogController extends Controller
 			printUtils::printError();
 			exit;
 		}
-		$item = (new BlogModel())->getItem($id[0]);
-		if(!($item instanceof itemClass)){
+        $item = (new BlogModel())->getArticle($id[0]);
+        if (!($item instanceof articleClass)) {
 			printUtils::printError();
 			exit;
 		}
@@ -86,39 +78,33 @@ class BlogController extends Controller
 			printUtils::printError();
 			exit;
 		}
-		$tags = $item->getTags();
-		$tagsarray = explode("、",$tags);
-		$tagstxt ="";
-		foreach ($tagsarray as $a){
-			$tagstxt = $tagstxt.'<a href="/blog/tags/'.$a.'" class="am-badge am-badge-primary  am-round" style="color: #1E88E5;background-color: #FFFFFF;border: solid 1px #1E88E5 ;float: left">' .$a.'</a>';
-		}
-		(new BlogModel())->addPageVisits('article:'.$item->getId());
-		$this->assign('title', $item->getTitle());
+        (new BlogModel())->addArticleVisits('article:' . $item->getId());
+        $this->assign('id', $item->getId());
+        $this->assign('title', rsConfig::$config['WebTitle'] . $item->getTitle());
+        $this->assign('articleTitle', $item->getTitle());
 		$this->assign('author',$item->getAuthor() );
 		$this->assign('time',$item->getTime() );
 		$this->assign('visits', $item->getVisits());
 		$this->assign('likes', $item->getLikes());
-		$this->assign('tags',$tagstxt);
-		$this->assign('content',$item->getContent() );
+        $this->assign('tags', explode("、", $item->getTags()));
+        $this->assign('content', ($item->getContent()));
+        $this->assign('sidebars', $this->getLayouts('sidebars'));
 		$this->render();
 	}
-
 	public function login($id){
 		sessionUtils::start();
 		$ip = addressUtils::getAdress();
-		$username = "";
-		$password = "";
 		$needAlert=false;
 		if(!isset($id[0])){
 			$id[0] = "login";
 		}
 		if($id[0] == 'logout'){
-			(new BlogModel())->addPageVisits('logout:');
+            (new BlogModel())->addArticleVisits('logout:');
 			sessionUtils::remove($ip);
 			header("Location: /blog/index");
 			exit;
 		}
-		(new BlogModel())->addPageVisits('login:');
+        (new BlogModel())->addArticleVisits('login:');
 		if(array_key_exists('user',$_POST) && array_key_exists('password',$_POST)){
 			$username = ($_POST['user']);
 			$password = ($_POST['password']);
@@ -128,7 +114,7 @@ class BlogController extends Controller
 				exit;
 			}else{
 				$needAlert=true;
-				$this->assign('title','登陆失败' );
+                $this->assign('title', rsConfig::$config['WebTitle'] . '登陆失败');
 				$this->assign('needAlert',$needAlert);
 				$this->render();
 			}
@@ -136,7 +122,7 @@ class BlogController extends Controller
 			$user = new userClass($ip);
 			if(!(new UserModel($user))->isLoginInTime()){
 				//不能自动登陆，无任何操作。
-				$this->assign('title','请登陆' );
+                $this->assign('title', rsConfig::$config['WebTitle'] . '请登陆');
 				$this->assign('needAlert',$needAlert);
 				$this->render();
 			}else{
@@ -168,38 +154,30 @@ class BlogController extends Controller
 			exit;
 		}
 		if (($num - 1) * 5 > $numbs) {
-			//printUtils::printError();
-			//return;
 			$num = 1;
 		}
-		(new BlogModel())->addPageVisits('tags:'.$tag.':'.$num);
+        (new BlogModel())->addArticleVisits('tags:' . $tag . ':' . $num);
 		$arr = (new BlogModel())->where(['tags like \'%'.$tag.'%\' ','AND `index` != -1'])->order(['id desc LIMIT '.(($num - 1) * 5) .',5'])->fetchAll();
 		$pages = "";
-		$this->assign('title', 'Rlxzmdd\'s | Blog');
+        $this->assign('title', rsConfig::$config['WebTitle'] . '标签搜索');
 		$this->renderTop();
 		$this->renderHeader();
 		foreach ($arr as $key=>$value){
-			$tags =  $value['tags'];
-			$tagsarray = explode("、",$tags);
-			$tagstxt ="";
-			foreach ($tagsarray as $a){
-				$tagstxt = $tagstxt. '<a href="/blog/tags/'.$a.'" class="am-badge am-badge-primary  am-round" style="color: #1E88E5;background-color: #FFFFFF;border: solid 1px #1E88E5 ;float: left;">' .$a.'</a>';
-			}
-			$p = new itemClass($value['id'], $value['title'], $value['content'], $value['time'], $value['author'],$value['tags'],$value['index']);
+            $p = new articleClass($value['id'], $value['title'], $value['content'], $value['time'], $value['author'], $value['tags'], $value['index'], (new BlogModel())->getArticleLikes($value['id']), (new BlogModel())->getArticleVisits($value['id']));
 			$this->assign('id', $p->getId());
 			$this->assign('title',$p->getTitle());
-			$this->assign('content', textUtils::subChinaStr($p->getContent()) . '......');
+            $this->assign('content', textUtils::filterText(textUtils::subChinaStr($p->getContent())));
 			$this->assign('time', $p->getTime());
 			$this->assign('author', $p->getAuthor());
-			$this->assign('tagstxt',$tagstxt);
+            $this->assign('tags', explode("、", $value['tags']));
 			$this->assign('visits', $p->getVisits());
 			$this->assign('likes', $p->getLikes());
 			$this->assign('index', $p->getVisits());
 			$pages = $pages.$this->renderLayout("shortArticle");
-			//$pages=$pages. printUtils::initItem($p);
 		}
-		$this->assign('title', 'Rlxzmdd\'s | Blog');
-		$this->assign('pages', $pages);
+        $this->assign('articles', $pages);
+        $this->assign('sidebars', $this->getLayouts('sidebars'));
+        $this->assign('tag', $tag);
 		$this->assign('skip', printUtils::printTagsSkip($num,$numbs,$tag));
 		$this->renderView();
 		$this->renderFooter();
@@ -210,6 +188,5 @@ class BlogController extends Controller
 	{
 		print_r($param);
 		printUtils::printError();
-		//print_r(sessionUtils::get(addressUtils::getAdress()));
 	}
 }

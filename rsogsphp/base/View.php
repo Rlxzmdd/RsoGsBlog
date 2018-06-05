@@ -15,13 +15,24 @@ class View
         $this->_controller = strtolower($controller);
         $this->_action = strtolower($action);
     }
- 
+
+    //得到一个页面数据
+    public function getLayouts($layoutFiles)
+    {
+        extract($this->variables);
+        $controllerLayout = APP_PATH . 'app/views/layouts/' . $this->_controller . '/' . $layoutFiles . '.php';
+        //判断视图文件是否存在
+        if (is_file($controllerLayout)) {
+            return (require($controllerLayout));
+        } else {
+            return "<h1>这里发生了一个错误</h1>";
+        }
+    }
     // 分配变量
     public function assign($name, $value)
     {
         $this->variables[$name] = $value;
     }
-
     public function renderTop(){
 		//将数组中的值转为变量
 		$defaultStyle = '/static/assets/css/'.$this->_controller.'/'.'default.css';

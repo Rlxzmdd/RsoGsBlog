@@ -47,4 +47,9 @@ class Controller
 	public function renderFooter(){
 		$this->_view->renderFooter();
 	}
+
+    public function getLayouts($layoutFile)
+    {
+        return ($this->_view->getLayouts($layoutFile));
+    }
 }

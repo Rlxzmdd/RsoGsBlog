@@ -11,6 +11,6 @@
 <script src="/static/assets/js/jquery-3.2.1.min.js"></script>
 <!--<![endif]-->
 <script src="/static/assets/js/amazeui.min.js"></script>
-<script src="/static/assets/js/app.js"></script>
+<script src="/static/assets/js/blog.js"></script>
 </body>
 </html>

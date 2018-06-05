@@ -229,8 +229,17 @@
   -moz-box-sizing: border-box;
   word-wrap: break-word !important;
   white-space: pre-wrap !important;
+
+  border: 0;
+  border-left: 4px solid #E91E63;
+  background-color: #212529;
+  margin-left: -10px;
+  margin-right: -10px;
+  box-shadow: 0 0 0 0, /*左边阴影*/ 0 0 0 0, /*右边阴影*/ 0 0 5px #E0E0E0, /*顶部阴影*/ 0 0 5px #E0E0E0; /*底边阴影*/
 }
 .simditor .simditor-body img {
+  width: 100%;
+  height: auto;
   cursor: pointer;
 }
 .simditor .simditor-body img.selected {
@@ -673,8 +682,12 @@
 }
 .simditor .simditor-body blockquote, .editor-style blockquote {
   border-left: 6px solid #ddd;
-  padding: 5px 0 5px 10px;
-  margin: 15px 0 15px 15px;
+  color: #424242;
+  background-color: #FAFAFA;
+  padding: 5px 10px;
+  border-left: 4px solid #3949AB;
+  margin: 15px -10px 10px;
+  box-shadow: 0 0 0 0, /*左边阴影*/ 0 0 0 0, /*右边阴影*/ 0 0 5px #E0E0E0, /*顶部阴影*/ 0 0 5px #E0E0E0; /*底边阴影*/
 }
 .simditor .simditor-body blockquote > :first-child, .editor-style blockquote > :first-child {
   margin-top: 0;
@@ -693,7 +706,6 @@
   margin: 15px 0;
   display: block;
   line-height: 18px;
-  background: #F0F0F0;
   border-radius: 3px;
   font-size: 13px;
   font-family: 'monaco', 'Consolas', "Liberation Mono", Courier, monospace;
@@ -704,9 +716,14 @@
 .simditor .simditor-body pre code, .editor-style pre code {
   display: block;
   padding: 0;
-  margin: 0;
-  background: none;
   border-radius: 0;
+
+  border: 0;
+  border-left: 4px solid #E91E63;
+  background: #212529 none;
+  margin-left: -10px;
+  margin-right: -10px;
+  box-shadow: 0 0 0 0, /*左边阴影*/ 0 0 0 0, /*右边阴影*/ 0 0 5px #E0E0E0, /*顶部阴影*/ 0 0 5px #E0E0E0; /*底边阴影*/
 }
 .simditor .simditor-body hr, .editor-style hr {
   display: block;

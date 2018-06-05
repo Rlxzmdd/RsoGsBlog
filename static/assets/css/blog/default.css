@@ -53,7 +53,7 @@ body {
     transition:all .2s ease-in 0s;
     -webkit-transition:all .2s ease-in 0s;
     -moz-transition:all .2s ease-in 0s;
-    box-shadow: 0 0 10px #E0E0E0;
+    box-shadow: 0 0 6px #E0E0E0;
     border: 0;
 }
 .blog-body-sidebar .am-panel-group{

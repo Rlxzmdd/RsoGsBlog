@@ -6,14 +6,11 @@
  * Time: 9:45
  */
 namespace app\models;
-use app\classes\itemClass;
 use app\classes\userClass;
 use app\utils\addressUtils;
-use app\utils\printUtils;
 use app\utils\sessionUtils;
 use app\utils\timeUtils;
 use rsogsphp\base\Model;
-use rsogsphp\db\Db;
 
 class UserModel extends Model
 {

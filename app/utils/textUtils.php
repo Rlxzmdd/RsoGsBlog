@@ -7,14 +7,16 @@ namespace app\utils;
  * Time: 19:48
  */
 class textUtils{
-	static $status = [-1=>'隐藏删除',0=>'主页隐藏',1=>'正常显示',2=>'置顶中'];
+    static $status = [-1 => '隐藏删除', 0 => '主页隐藏', 1 => '正常', 2 => '置顶'];
 	static function getStatusWithIndex($index){
 		return isset(textUtils::$status[$index])?textUtils::$status[$index]:"未知:".$index;
 	}
 	static function filterText($text){
-		$a = htmlentities($text,ENT_QUOTES);
-		$b = htmlspecialchars($a,ENT_QUOTES,"UTF-8");
-		return $b;
+        $text = str_replace("<p>", "<p> ", $text);
+        $text = str_replace("&nbsp;", "", $text);
+        $text = strip_tags($text);
+        $text = htmlspecialchars($text, ENT_HTML5, "UTF-8");
+        return $text;
 	}
 	static function filterPageText($text){
 		$a = str_replace("'",'&quot;',$text);

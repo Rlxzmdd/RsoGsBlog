@@ -8,7 +8,6 @@ namespace app\utils;
  * Date: 2018/5/6
  * Time: 12:08
  */
-use app\classes\itemClass;
 use app\classes\userClass;
 use app\models\UserModel;
 
@@ -20,46 +19,37 @@ class printUtils{
 	}
 	static function printSkip($pages, $nums)
 	{
-
-		$skip = ('<div class="blog-body-skip"><ul class="am-pagination blog-article-pagination">');
-		if ($nums <= 5 && $nums >= 1) {
-			$skip = $skip.('</ul></div>');
+        $skip = '';
+        if ($nums <= 5 && $nums >= 1) {
 			return $skip;
 		}
 		if ($pages * 5 <= 5) {
-			$skip = $skip.('<li class="am-pagination-next"><a href="/blog/index/' . ($pages + 1) . '">下一页&raquo;</a></li>');
-			$skip = $skip.('</ul></div>');
+            $skip = $skip . ('<li class="rs-pagination-next"><a href="/blog/index/' . ($pages + 1) . '">下一页&raquo;</a></li>');
 			return $skip;
 		} elseif ($pages * 5 >= $nums) {
-			$skip = $skip.('<li class="am-pagination-prev"><a href="/blog/index/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
-			$skip = $skip.('</ul></div>');
+            $skip = $skip . ('<li class="rs-pagination-prev"><a href="/blog/index/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
 			return $skip;
 		} else {
-			$skip = $skip.('<li class="am-pagination-prev"><a href="/blog/index/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
-			$skip = $skip.('<li class="am-pagination-next"><a href="/blog/index/' . ($pages + 1) . '">下一页&raquo;</a></li>');
-			$skip = $skip.('</ul></div>');
+            $skip = $skip . ('<li class="rs-pagination-prev"><a href="/blog/index/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
+            $skip = $skip . ('<li class="rs-pagination-next"><a href="/blog/index/' . ($pages + 1) . '">下一页&raquo;</a></li>');
 			return $skip;
 		}
 	}
 	static function printTagsSkip($pages, $nums,$tag)
 	{
-		$skip = ('<div class="blog-body-skip"><ul class="am-pagination blog-article-pagination">');
+        $skip = '';
 		if ($nums <= 5 && $nums >= 1) {
-			$skip = $skip.('</ul></div>');
 			return $skip;
 		}
 		if ($pages * 5 <= 5) {
-			$skip = $skip.('<li class="am-pagination-next"><a href="/blog/tags/'.$tag .'/'. ($pages + 1) . '">下一页&raquo;</a></li>');
-			$skip = $skip.('</ul></div>');
+            $skip = $skip . ('<li class="rs-pagination-next"><a href="/blog/tags/' . $tag . '/' . ($pages + 1) . '">下一页&raquo;</a></li>');
 			return $skip;
 		} elseif ($pages * 5 >= $nums) {
-			$skip = $skip.('<li class="am-pagination-prev"><a href="/blog/tags/'.$tag .'/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
-			$skip = $skip.('</ul></div>');
+            $skip = $skip . ('<li class="rs-pagination-prev"><a href="/blog/tags/' . $tag . '/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
 			return $skip;
 		} else {
-			$skip = $skip.('<li class="am-pagination-prev"><a href="/blog/tags/'.$tag .'/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
-			$skip = $skip.('<li class="am-pagination-next"><a href="/blog/tags/'.$tag .'/' . ($pages + 1) . '">下一页&raquo;</a></li>');
-			$skip = $skip.('</ul></div>');
+            $skip = $skip . ('<li class="rs-pagination-prev"><a href="/blog/tags/' . $tag . '/' . ($pages - 1) . '">&laquo; 上一页</a></li>');
+            $skip = $skip . ('<li class="rs-pagination-next"><a href="/blog/tags/' . $tag . '/' . ($pages + 1) . '">下一页&raquo;</a></li>');
 			return $skip;
 		}
 	}
