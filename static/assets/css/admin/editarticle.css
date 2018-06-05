@@ -1,0 +1,108 @@
+html,
+body {
+    height: unset;
+    overflow: auto;
+}
+
+.admin-offcanvas-bar {
+    background-color: #f3f3f3;
+}
+
+@media only screen and (min-width: 640px) {
+    .admin-content {
+        padding-left: 240px;
+    }
+}
+
+.admin-content {
+    height: unset;
+}
+
+.admin-sidebar {
+    position: fixed;
+    width: 260px;
+    min-height: 100%;
+    max-height: 100%;
+    top: 50px;
+    float: left;
+    border-right: 1px solid #cecece;
+}
+
+.blog-body-article {
+    padding: 10px;
+    background-color: white;
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+blockquote p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+blockquote {
+    color: #424242;
+    background-color: #FAFAFA;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-left: 4px solid #3949AB;
+    margin-bottom: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    box-shadow: 0 0 0 0, /*左边阴影*/ 0 0 0 0, /*右边阴影*/ 0 0 5px #E0E0E0, /*顶部阴影*/ 0 0 5px #E0E0E0; /*底边阴影*/
+}
+
+blockquote:not(:first-child) {
+    margin-top: 10px;
+}
+
+.blog-article-tags {
+    margin-top: 20px;
+    height: 21px;
+}
+
+.am-comments-list {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 641px) {
+    .blog-body-sidebar {
+        padding-top: 10px;
+    }
+
+    .blog-article-tags {
+        background-color: white;
+        height: 50px;
+        z-index: 100;
+        position: fixed;
+        padding: 15px 10px 15px 10px;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        box-shadow: 0 0 10px #E0E0E0;
+    }
+
+    .blog-footer {
+        margin-bottom: 40px;
+    }
+}
+
+pre {
+
+    border: 0;
+    border-left: 4px solid #E91E63;
+    background-color: #212529;
+    margin-left: -10px;
+    margin-right: -10px;
+    box-shadow: 0 0 0 0, /*左边阴影*/ 0 0 0 0, /*右边阴影*/ 0 0 5px #E0E0E0, /*顶部阴影*/ 0 0 5px #E0E0E0; /*底边阴影*/
+}
+
+.blog-article-content {
+    margin: 10px -10px 10px -10px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 0 0 0, /*左边阴影*/ 0 0 0 0, /*右边阴影*/ 0 0 5px #E0E0E0 inset, /*顶部阴影*/ 0 0 5px #E0E0E0 inset; /*底边阴影*/
+}
